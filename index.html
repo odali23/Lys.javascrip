@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lys Estudios - Página de Inicio</title>
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background: #f9f9f9;
+            transition: background 0.3s, color 0.3s;
+        }
+        header {
+            background: linear-gradient(90deg, #6c63ff 0%, #ff6ec4 50%, #48c6ef 100%);
+            color: #fff;
+            padding: 2rem 1rem 1rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(76, 70, 255, 0.15);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            transition: background 0.3s, color 0.3s;
+        }
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+        }
+        nav a:hover {
+            color: #ffe082;
+            background: rgba(255,255,255,0.08);
+        }
+        .toggle-theme-btn {
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.3s, color 0.3s;
+        }
+        main {
+            margin: 7.5rem auto 2rem auto;
+            max-width: 800px;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            transition: background 0.3s, color 0.3s;
+        }
+        pre {
+            background: #23272f;
+            color: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 1px 8px rgba(76, 70, 255, 0.07);
+        }
+        .icon-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .run-btn {
+            margin-bottom: 1.5rem;
+            background: #ffe082;
+            color: #23272f;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(255, 224, 130, 0.13);
+            transition: background 0.2s, color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .run-btn:hover {
+            background: #ffd54f;
+            color: #181a1b;
+        }
+        .output-area {
+            background: #f1f1f1;
+            color: #23272f;
+            border-radius: 6px;
+            padding: 0.7rem 1rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+            min-height: 1.5em;
+            font-family: 'Fira Mono', 'Consolas', monospace;
+            font-size: 1rem;
+            white-space: pre-wrap;
+            border: 1px solid #e0e0e0;
+        }
+        .code-block {
+            margin-bottom: 2.2rem;
+        }
+        .editor-section {
+            margin: 2.5rem 0 1.5rem 0;
+            padding: 1.5rem;
+            background: #f5f7fa;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(76, 70, 255, 0.06);
+        }
+        .editor-section h3 {
+            margin-top: 0;
+        }
+        textarea#js-editor {
+            width: 100%;
+            min-height: 90px;
+            font-family: 'Fira Mono', 'Consolas', monospace;
+            font-size: 1rem;
+            border-radius: 6px;
+            border: 1px solid #d1d1d1;
+            padding: 0.7rem;
+            margin-bottom: 0.7rem;
+            background: #23272f;
+            color: #ffe082;
+            resize: vertical;
+            transition: background 0.3s, color 0.3s;
+        }
+        .editor-section .run-btn {
+            background: #6c63ff;
+            color: #fff;
+        }
+        .editor-section .run-btn:hover {
+            background: #5548c6;
+        }
+        footer {
+            text-align: center;
+            padding: 2.5rem 0 1.5rem 0;
+            background: linear-gradient(90deg, #23272f 0%, #6c63ff 100%);
+            color: #ffe082;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            border-radius: 0 0 12px 12px;
+            letter-spacing: 1px;
+            box-shadow: 0 -2px 16px rgba(76, 70, 255, 0.09);
+            position: relative;
+        }
+        footer .footer-icons {
+            margin-bottom: 0.7rem;
+        }
+        footer .footer-icons i {
+            font-size: 1.7rem;
+            margin: 0 0.5rem;
+            vertical-align: middle;
+            color: #ffe082;
+            transition: color 0.2s;
+        }
+        footer .footer-icons i:hover {
+            color: #ff6ec4;
+        }
+        footer small {
+            display: block;
+            margin-top: 0.7rem;
+            color: #ffe082b0;
+            font-size: 0.97em;
+        }
+        /* Modo oscuro */
+        body.dark {
+            background: #181a1b;
+            color: #e0e0e0;
+        }
+        body.dark main {
+            background: #23272f;
+            color: #e0e0e0;
+        }
+        body.dark header {
+            background: linear-gradient(90deg, #23272f 0%, #181a1b 100%);
+            color: #ffe082;
+        }
+        body.dark nav a {
+            color: #ffe082;
+        }
+        body.dark nav a:hover {
+            color: #fff;
+        }
+        body.dark pre, body.dark textarea#js-editor {
+            background: #111215;
+            color: #ffe082;
+        }
+        body.dark .toggle-theme-btn {
+            background: rgba(255,255,255,0.08);
+            color: #ffe082;
+        }
+        body.dark .output-area {
+            background: #23272f;
+            color: #ffe082;
+            border: 1px solid #181a1b;
+        }
+        body.dark .editor-section {
+            background: #23272f;
+        }
+        body.dark footer {
+            background: linear-gradient(90deg, #181a1b 0%, #23272f 100%);
+            color: #ffe082;
+        }
+        body.dark footer .footer-icons i {
+            color: #ffe082;
+        }
+        body.dark footer .footer-icons i:hover {
+            color: #6c63ff;
+        }
+        @media (max-width: 600px) {
+            main {
+                padding: 1rem;
+            }
+            .toggle-theme-btn {
+                right: 1rem;
+                top: 1rem;
+                font-size: 1rem;
+            }
+            .editor-section {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content"></div>
+            <h1>Para Lys Estudios</h1>
+            <button class="toggle-theme-btn" id="toggleThemeBtn">
+                <i class="bi bi-moon"></i> Modo oscuro
+            </button>
+            <nav>
+                <a href="#"><i class="bi bi-house-door"></i>Inicio</a>
+                <a href="ejemplos.html"><i class="bi bi-code-slash"></i>Ejemplos</a>
+                <a href="#"><i class="bi bi-lightbulb"></i>Tips</a>
+                <a href="sobre mi .html"><i class="bi bi-person"></i>Sobre mí</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <!-- Editor interactivo -->
+        <section class="editor-section">
+            <h3><i class="bi bi-terminal"></i> Prueba tu código JavaScript aquí</h3>
+            <textarea id="js-editor" spellcheck="false">// Escribe tu código aquí y haz clic en "Ejecutar"
+// Ejemplo:
+console.log("¡Hola Lys!");</textarea>
+            <button class="run-btn" onclick="runEditorCode()"><i class="bi bi-play-circle"></i> Ejecutar</button>
+            <div class="output-area" id="editor-output"></div>
+        </section>
+        <!-- Explicación de variables -->
+        <div class="icon-title">
+            <i class="bi bi-archive" style="font-size: 2rem; color: #6c63ff;"></i>
+            <h2>¿Qué son las variables?</h2>
+        </div>
+        <div class="code-block">
+            <p>
+                Las variables son espacios en la memoria donde puedes guardar información que puede cambiar durante la ejecución del programa. En JavaScript, puedes crear variables usando <code>let</code>, <code>const</code> o <code>var</code>.
+            </p>
+            <pre id="code-variables">
+// Declaración de variables
+let edad = 25;
+const nombre = "Lys";
+var ciudad = "Madrid";
+
+console.log(nombre + " tiene " + edad + " años y vive en " + ciudad);
+            </pre>
+            <button class="run-btn" onclick="runCode('code-variables', 'output-variables')"><i class="bi bi-play-circle"></i> Probar este código</button>
+            <div class="output-area" id="output-variables"></div>
+        </div>
+        <hr style="margin:2rem 0;">
+        <!-- Explicación de objetos -->
+        <div class="icon-title">
+            <i class="bi bi-box" style="font-size: 2rem; color: #ff6ec4;"></i>
+            <h2>¿Qué son los objetos?</h2>
+        </div>
+        <div class="code-block">
+            <p>
+                Los objetos en JavaScript permiten agrupar datos y funciones relacionadas en una sola entidad. Se crean usando llaves <code>{}</code> y pueden tener propiedades y métodos.
+            </p>
+            <pre id="code-objetos">
+// Crear un objeto
+let persona = {
+    nombre: "Lys",
+    edad: 22,
+    saludar: function() {
+        return "Hola, soy " + this.nombre;
+    }
+};
+
+console.log(persona.nombre);
+console.log(persona.saludar());
+            </pre>
+            <button class="run-btn" onclick="runCode('code-objetos', 'output-objetos')"><i class="bi bi-play-circle"></i> Probar este código</button>
+            <div class="output-area" id="output-objetos"></div>
+        </div>
+        <hr style="margin:2rem 0;">
+        <!-- Explicación de bucles -->
+        <div class="icon-title">
+            <i class="bi bi-arrow-repeat" style="font-size: 2rem; color: #48c6ef;"></i>
+            <h2>¿Qué son los bucles?</h2>
+        </div>
+        <div class="code-block">
+            <p>
+                Los bucles permiten ejecutar un bloque de código varias veces. Los tipos más comunes en JavaScript son <b>for</b>, <b>while</b> y <b>do...while</b>.
+            </p>
+            <pre id="code-bucles"></pre>
+// Bucle for
+for(let i = 1; i <= 5; i++) {
+    console.log("Repetición número: " + i);
+}
+
+// Bucle while
+let contador = 1;
+while(contador <= 3) {
+    console.log("Contador: " + contador);
+    contador++;
+}
+
+// Bucle do...while
+let x = 1;
+do {
+    console.log("Valor de x: " + x);
+    x++;
+} while(x <= 2);
+            </pre>
+            <button class="run-btn" onclick="runCode('code-bucles', 'output-bucles')"><i class="bi bi-play-circle"></i> Probar este código</button>
+            <div class="output-area" id="output-bucles"></div>
+        </div>
+        <hr style="margin:2rem 0;">
+        <!-- Explicación de funciones -->
+        <div class="icon-title">
+            <i class="bi bi-gear" style="font-size: 2rem; color: #ffe082;"></i>
+            <h2>¿Qué son las funciones?</h2>
+        </div>
+        <div class="code-block">
+            <p>
+                Las funciones son bloques de código que puedes reutilizar. Se definen con la palabra <code>function</code> y pueden recibir parámetros.
+            </p>
+            <pre id="code-funciones">
+// Declarar una función
+function saludar(nombre) {
+    return "Hola, " + nombre + "!";
+}
+
+console.log(saludar("Lys"));
+            </pre>
+            <button class="run-btn" onclick="runCode('code-funciones', 'output-funciones')"><i class="bi bi-play-circle"></i> Probar este código</button>
+            <div class="output-area" id="output-funciones"></div>
+        </div>
+        <hr style="margin:2rem 0;">
+        <!-- Explicación de arreglos -->
+        <div class="icon-title">
+            <i class="bi bi-list-ul" style="font-size: 2rem; color: #6c63ff;"></i>
+            <h2>¿Qué son los arreglos?</h2>
+        </div>
+        <div class="code-block">
+            <p>
+                Los arreglos son listas que almacenan varios valores. Puedes acceder a cada elemento usando su índice.
+            </p>
+            <pre id="code-arreglos">
+// Crear un arreglo
+let frutas = ["Manzana", "Banana", "Naranja"];
+frutas.push("Uva");
+console.log(frutas);
+            </pre>
+            <button class="run-btn" onclick="runCode('code-arreglos', 'output-arreglos')"><i class="bi bi-play-circle"></i> Probar este código</button>
+            <div class="output-area" id="output-arreglos"></div>
+        </div>
+        <hr style="margin:2rem 0;">
+        <!-- Explicación de condicionales -->
+        <div class="icon-title">
+            <i class="bi bi-question-circle" style="font-size: 2rem; color: #ff6ec4;"></i>
+            <h2>¿Qué son las condicionales?</h2>
+        </div>
+        <div class="code-block">
+            <p>
+                Las condicionales permiten ejecutar diferentes bloques de código según si una condición es verdadera o falsa. Se usan <code>if</code>, <code>else if</code> y <code>else</code>.
+            </p>
+            <pre id="code-condicionales">
+// Ejemplo de condicional
+let edad = 18;
+if(edad >= 18) {
+    console.log("Eres mayor de edad");
+} else {
+    console.log("Eres menor de edad");
+}
+            </pre>
+            <button class="run-btn" onclick="runCode('code-condicionales', 'output-condicionales')"><i class="bi bi-play-circle"></i> Probar este código</button>
+            <div class="output-area" id="output-condicionales"></div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-icons">
+            <i class="bi bi-github"></i>
+            <i class="bi bi-youtube"></i>
+            <i class="bi bi-twitter-x"></i>
+            <i class="bi bi-envelope"></i>
+        </div>
+        <div>
+            <b>Lys Estudios</b> &copy; 2024 &mdash; Aprende programación con ejemplos interactivos.
+        </div>
+        <small>Hecho con <i class="bi bi-heart-fill" style="color:#ff6ec4"></i> para la comunidad.</small>
+    </footer>
+    <script>
+        // Modo oscuro
+        const btn = document.getElementById('toggleThemeBtn');
+        btn.onclick = () => {
+            document.body.classList.toggle('dark');
+            localStorage.setItem('lys-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+        };
+        // Mantener modo oscuro si estaba activado
+        if(localStorage.getItem('lys-theme') === 'dark') document.body.classList.add('dark');
+
+        // Ejecutar código de los bloques
+        function runCode(codeId, outputId) {
+            const code = document.getElementById(codeId).innerText;
+            const outputDiv = document.getElementById(outputId);
+            outputDiv.innerText = '';
+            let logs = [];
+            const customConsole = {
+                log: (...args) => logs.push(args.join(' ')),
+                error: (...args) => logs.push('Error: ' + args.join(' '))
+            };
+            try {
+                // eslint-disable-next-line no-new-func
+                new Function('console', code)(customConsole);
+                outputDiv.innerText = logs.join('\n') || '(Sin salida)';
+            } catch (e) {
+                outputDiv.innerText = 'Error: ' + e.message;
+            }
+        }
+
+        // Editor interactivo
+        function runEditorCode() {
+            const code = document.getElementById('js-editor').value;
+            const outputDiv = document.getElementById('editor-output');
+            outputDiv.innerText = '';
+            let logs = [];
+            const customConsole = {
+                log: (...args) => logs.push(args.join(' ')),
+                error: (...args) => logs.push('Error: ' + args.join(' '))
+            };
+            try {
+                // eslint-disable-next-line no-new-func
+                new Function('console', code)(customConsole);
+                outputDiv.innerText = logs.join('\n') || '(Sin salida)';
+            } catch (e) {
+                outputDiv.innerText = 'Error: ' + e.message;
+            }
+        }
+    </script>
+</body>
+</html>
